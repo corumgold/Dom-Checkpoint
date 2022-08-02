@@ -178,7 +178,7 @@ describe('Slice 2: Unlocking & Rendering Producers', function() {
   });
 
   describe('The makeDisplayNameFromId function', function() {
-    xit('returns a string', function() {
+    it('returns a string', function() {
       const result = code.makeDisplayNameFromId('input_string');
       expect(result).to.be.a('string');
     });
