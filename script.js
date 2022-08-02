@@ -5,7 +5,7 @@
  **************/
 
 function updateCoffeeView(coffeeQty) {
-  document.getElementById("coffee_counter").innerText = coffeeQty
+  document.getElementById("coffee_counter").innerText = coffeeQty;
 }
 
 function clickCoffee(data) {
@@ -18,7 +18,11 @@ function clickCoffee(data) {
  **************/
 
 function unlockProducers(producers, coffeeCount) {
-  // your code here
+  producers.forEach((producer) => {
+    if (coffeeCount >= producer.price / 2) {
+      producer.unlocked = true;
+    }
+  });
 }
 
 function getUnlockedProducers(data) {
@@ -50,8 +54,7 @@ function makeProducerDiv(producer) {
   return containerDiv;
 }
 
-function deleteAllChildNodes(parent) {
-}
+function deleteAllChildNodes(parent) {}
 
 function renderProducers(data) {
   // your code here

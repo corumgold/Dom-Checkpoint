@@ -117,7 +117,7 @@ describe('Slice 2: Unlocking & Rendering Producers', function() {
       };
     });
 
-    xit("changes `unlocked` to `true` when the player's coffee count is equal to or larger than half the initial price of the producer", function() {
+    it("changes `unlocked` to `true` when the player's coffee count is equal to or larger than half the initial price of the producer", function() {
       data.coffee = 100;
       code.unlockProducers(data.producers, data.coffee);
       expect(data.producers[0].unlocked).to.equal(true);
