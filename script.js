@@ -5,7 +5,7 @@
  **************/
 
 function updateCoffeeView(coffeeQty) {
-  // your code here
+  document.getElementById("coffee_counter").innerText = coffeeQty
 }
 
 function clickCoffee(data) {
@@ -30,8 +30,8 @@ function makeDisplayNameFromId(id) {
 
 // You shouldn't need to edit this function-- its tests should pass once you've written makeDisplayNameFromId
 function makeProducerDiv(producer) {
-  const containerDiv = document.createElement('div');
-  containerDiv.className = 'producer';
+  const containerDiv = document.createElement("div");
+  containerDiv.className = "producer";
   const displayName = makeDisplayNameFromId(producer.id);
   const currentCost = producer.price;
   const html = `
@@ -50,7 +50,6 @@ function makeProducerDiv(producer) {
 }
 
 function deleteAllChildNodes(parent) {
-  // your code here
 }
 
 function renderProducers(data) {
@@ -103,19 +102,19 @@ function tick(data) {
 
 // How does this check work? Node gives us access to a global variable /// called `process`, but this variable is undefined in the browser. So,
 // we can see if we're in node by checking to see if `process` exists.
-if (typeof process === 'undefined') {
+if (typeof process === "undefined") {
   // Get starting data from the window object
   // (This comes from data.js)
   const data = window.data;
 
   // Add an event listener to the giant coffee emoji
-  const bigCoffee = document.getElementById('big_coffee');
-  bigCoffee.addEventListener('click', () => clickCoffee(data));
+  const bigCoffee = document.getElementById("big_coffee");
+  bigCoffee.addEventListener("click", () => clickCoffee(data));
 
   // Add an event listener to the container that holds all of the producers
   // Pass in the browser event and our data object to the event listener
-  const producerContainer = document.getElementById('producer_container');
-  producerContainer.addEventListener('click', event => {
+  const producerContainer = document.getElementById("producer_container");
+  producerContainer.addEventListener("click", (event) => {
     buyButtonClick(event, data);
   });
 
@@ -142,6 +141,6 @@ else if (process) {
     updatePrice,
     attemptToBuyProducer,
     buyButtonClick,
-    tick
+    tick,
   };
 }
