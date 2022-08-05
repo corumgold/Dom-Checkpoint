@@ -183,7 +183,7 @@ describe('Slice 2: Unlocking & Rendering Producers', function() {
       expect(result).to.be.a('string');
     });
 
-    xit('transforms its input string from snake_case to Title Case', function() {
+    it('transforms its input string from snake_case to Title Case', function() {
       const testStrings = [
         'input_string',
         'mr._coffee',
@@ -207,12 +207,12 @@ describe('Slice 2: Unlocking & Rendering Producers', function() {
       qty: 5
     };
 
-    xit('returns a DOM element', function() {
+    it('returns a DOM element', function() {
       const result = code.makeProducerDiv(producer);
       expect(result).to.be.an('HTMLDivElement');
     });
 
-    xit('correctly fills in template string', function() {
+    it('correctly fills in template string', function() {
       // Here, we make a tiny fake DOM local to this test so we can append the element returned by makeProducerdiv to it. Then, we query this tiny DOM to make some assertions about it.
       const result = code.makeProducerDiv(producer);
       const doc = new JSDOM(`<!DOCTYPE html><body></body>`).window.document;
@@ -248,7 +248,7 @@ describe('Slice 2: Unlocking & Rendering Producers', function() {
       `).window.document;
     });
 
-    xit('calls the `.removeChild()` method on the DOM node passed in at least once', function() {
+    it('calls the `.removeChild()` method on the DOM node passed in at least once', function() {
       const spyOnRemoveChild = sinon.spy(doc.body, 'removeChild');
       code.deleteAllChildNodes(doc.body);
       expect(spyOnRemoveChild.called).to.be.equal(true);
@@ -256,7 +256,7 @@ describe('Slice 2: Unlocking & Rendering Producers', function() {
       spyOnRemoveChild.restore();
     });
 
-    xit('gets rid of all of the children of the DOM node passed in', function() {
+    it('gets rid of all of the children of the DOM node passed in', function() {
       code.deleteAllChildNodes(doc.body);
       expect(doc.body.childNodes.length).to.be.equal(0);
     });
@@ -283,7 +283,7 @@ describe('Slice 2: Unlocking & Rendering Producers', function() {
     });
 
     // We're giving you a big hint here...
-    xit('calls document.getElementById() or document.querySelector()', function() {
+    it('calls document.getElementById() or document.querySelector()', function() {
       const spyOnGetElementById = sinon.spy(document, 'getElementById');
       const spyOnQuerySelector = sinon.spy(document, 'querySelector');
       code.renderProducers(data);
@@ -295,7 +295,7 @@ describe('Slice 2: Unlocking & Rendering Producers', function() {
     });
 
     // Big hint: Don't just render blank divs; we've written the makeProducerDiv function for you, which should be called here.
-    xit('appends some producer div elements to the producer container', function() {
+    it('appends some producer div elements to the producer container', function() {
       code.renderProducers(data);
       const producerContainer = document.getElementById('producer_container');
       // Did you generate the right number of child nodes?
@@ -306,21 +306,21 @@ describe('Slice 2: Unlocking & Rendering Producers', function() {
     });
 
     // Hint: Call the function written to do this!
-    xit('unlocks any locked producers that need to be unlocked', function() {
+    it('unlocks any locked producers that need to be unlocked', function() {
       code.renderProducers(data);
       expect(data.producers[0].unlocked).to.be.equal(true);
       expect(data.producers[1].unlocked).to.be.equal(true);
       expect(data.producers[2].unlocked).to.be.equal(false);
     });
 
-    xit('only appends unlocked producers', function() {
+    it('only appends unlocked producers', function() {
       code.renderProducers(data);
       const producerContainer = document.getElementById('producer_container');
       expect(producerContainer.childNodes.length).to.be.equal(2);
       expect(producerContainer.childNodes[0].childNodes).to.have.length(5);
     });
 
-    xit("deletes the producer container's children before appending new producers", function() {
+    it("deletes the producer container's children before appending new producers", function() {
       const producerContainer = document.getElementById('producer_container');
       const fakeProducer = document.createElement('div');
       producerContainer.appendChild(fakeProducer);
@@ -329,7 +329,7 @@ describe('Slice 2: Unlocking & Rendering Producers', function() {
       expect(producerContainer.childNodes[0].childNodes).to.have.length(5);
     });
 
-    xit('is not in some way hardcoded to pass the tests', function() {
+    it('is not in some way hardcoded to pass the tests', function() {
       data.producers.push({ id: 'producer_D', price: 1, unlocked: true });
       const producerContainer = document.getElementById('producer_container');
       code.renderProducers(data);
@@ -367,7 +367,7 @@ describe('Slice 2: Unlocking & Rendering Producers', function() {
       };
     });
 
-    xit('updates the DOM to reflect any newly unlocked producers', function() {
+    it('updates the DOM to reflect any newly unlocked producers', function() {
       code.clickCoffee(data);
       const producerContainer = document.getElementById('producer_container');
       expect(producerContainer.childNodes.length).to.be.equal(2);

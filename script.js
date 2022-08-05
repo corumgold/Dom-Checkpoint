@@ -11,6 +11,7 @@ function updateCoffeeView(coffeeQty) {
 function clickCoffee(data) {
   data.coffee += 1;
   updateCoffeeView(data.coffee);
+  renderProducers(data)
 }
 
 /**************
@@ -60,10 +61,21 @@ function makeProducerDiv(producer) {
   return containerDiv;
 }
 
-function deleteAllChildNodes(parent) {}
+function deleteAllChildNodes(node) {
+  while (node.firstChild) {
+    node.removeChild(node.firstChild);
+  }
+}
 
 function renderProducers(data) {
-  // your code here
+  //arr of unlocked producers
+  let unlockedProducers = getUnlockedProducers(data);
+  let producerContainer = document.getElementById("producer_container");
+  deleteAllChildNodes(producerContainer);
+  //for every producer, make it into a div and append it!
+  unlockedProducers.forEach((producer) => {
+    producerContainer.appendChild(makeProducerDiv(producer));
+  });
 }
 
 /**************
