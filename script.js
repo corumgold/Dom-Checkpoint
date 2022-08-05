@@ -11,7 +11,7 @@ function updateCoffeeView(coffeeQty) {
 function clickCoffee(data) {
   data.coffee += 1;
   updateCoffeeView(data.coffee);
-  renderProducers(data)
+  renderProducers(data);
 }
 
 /**************
@@ -83,31 +83,52 @@ function renderProducers(data) {
  **************/
 
 function getProducerById(data, producerId) {
-  // your code here
+  return data.producers.find((producer) => {
+    return producer.id === producerId;
+  });
 }
 
 function canAffordProducer(data, producerId) {
-  // your code here
+  return getProducerById(data, producerId).price < data.coffee;
 }
 
 function updateCPSView(cps) {
-  // your code here
+  document.getElementById("cps").innerText = cps;
 }
 
 function updatePrice(oldPrice) {
-  // your code here
+  return Math.floor(oldPrice * 1.25);
 }
 
 function attemptToBuyProducer(data, producerId) {
-  // your code here
+  let producer = getProducerById(data, producerId);
+  if (producer.price < data.coffee) {
+    producer.qty++;
+    data.coffee -= producer.price;
+    producer.price = updatePrice(producer.price);
+    data.totalCPS += producer.cps;
+    return true;
+  }
+  return false;
 }
 
 function buyButtonClick(event, data) {
-  // your code here
+  //get "buy_producer" without "buy_"
+  if (event.target.tagName === "BUTTON") {
+    let clickedButtonId = event.target.id.slice(4);
+    if (!attemptToBuyProducer(data, clickedButtonId)) {
+      window.alert("Not enough coffee!");
+    }
+    renderProducers(data);
+    updateCoffeeView(data.coffee);
+    updateCPSView(data.totalCPS);
+  }
 }
 
 function tick(data) {
-  // your code here
+  data.coffee += data.totalCPS;
+  updateCoffeeView(data.coffee);
+  renderProducers(data)
 }
 
 /*************************
@@ -137,6 +158,7 @@ if (typeof process === "undefined") {
   // Pass in the browser event and our data object to the event listener
   const producerContainer = document.getElementById("producer_container");
   producerContainer.addEventListener("click", (event) => {
+    console.log(event);
     buyButtonClick(event, data);
   });
 
